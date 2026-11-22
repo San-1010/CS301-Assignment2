@@ -106,3 +106,16 @@ generate_equation(Numbers, Equation) :-
     format_expression(RightTree, RightString),
     string_concat(LeftString, "=", Temp),
     string_concat(Temp, RightString, Equation).
+
+
+
+% all_equations(Numbers, Equations) holds when Equations
+% is the sorted list of distinct valid arithmetic equation
+% strings generated from Numbers in their original order.
+% If no valid equations exist, Equations is the empty list.
+
+all_equations(Numbers, Equations) :-
+    findall(Equation,
+            generate_equation(Numbers, Equation),
+            AllEquations),
+    sort(AllEquations, Equations).
