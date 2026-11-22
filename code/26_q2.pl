@@ -26,3 +26,19 @@ apply_operator(/, A, B, Result) :-
     B =\= 0,
     0 is A mod B,
     Result is A // B.
+
+
+% expression(Numbers, Tree, Value) holds when Tree is a
+% binary arithmetic expression using every number in
+% Numbers exactly once and in the original order, and
+% Value is its integer result. All divisions are exact.
+
+expression([N], leaf(N), N) :-
+    integer(N).
+
+expression(Numbers, node(Op, LeftTree, RightTree), Value) :-
+    split_nonempty(Numbers, LeftNumbers, RightNumbers),
+    expression(LeftNumbers, LeftTree, LeftValue),
+    expression(RightNumbers, RightTree, RightValue),
+    member(Op, [+, -, *, /]),
+    apply_operator(Op, LeftValue, RightValue, Value).
