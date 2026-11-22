@@ -35,10 +35,12 @@ description: Guidelines, strict built-in allowlist, testing workflow, and self-r
 - **S2 Final Definition Rule:** In `26_q4.rkt`, ensure there is only **one** definition of `insert-if-short`—the final version defined in terms of `make-inserter`.
 
 ## 4. Running & Testing
+Run from the repository root (CS301-Assignment2), unless otherwise specified
 - **Direct execution (verifies zero output on load):**
   ```bash
-  racket 26_q3.rkt
-  racket 26_q4.rkt
+  racket code/26_q3.rkt
+  racket code/26_q4.rkt
+  ```
 
 - **Testing S1: (run from inside /tests)**
   { cat ../code/26_q3.rkt; tail -n +2 test_q3.rkt; } > /tmp/run_q3.rkt && racket /tmp/run_q3.rkt && rm /tmp/run_q3.rkt
