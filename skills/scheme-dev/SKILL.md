@@ -40,10 +40,10 @@ description: Guidelines, strict built-in allowlist, testing workflow, and self-r
   racket 26_q3.rkt
   racket 26_q4.rkt
 
-- **Testing S1:**
+- **Testing S1: (run from inside /tests)**
   { cat ../code/26_q3.rkt; tail -n +2 test_q3.rkt; } > /tmp/run_q3.rkt && racket /tmp/run_q3.rkt && rm /tmp/run_q3.rkt
 
-- **Testing S2:**
+- **Testing S2: (run from root)**
   { cat code/26_q4.rkt; echo "(print-insert-result)"; } > /tmp/run_q4.rkt && echo "42 ((1 2) (3 4 5) (6) ()) 3" | racket /tmp/run_q4.rkt && rm /tmp/run_q4.rkt
 
 ## 5. Self-Review Checklist (Apply Before Finalizing Any Response)
