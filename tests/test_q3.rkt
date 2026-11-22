@@ -1,15 +1,19 @@
 #lang racket/base
 
-(require "../code/26_q3.rkt")
-
 ;; Helper to run a traversal/metric printer on a labeled test tree.
 (define (run-case label tree)
-  (display (string-append "=== " label " ===\n"))
-  (display "-- print-inorder --\n")
+  (display '===)
+  (display label)
+  (display '===)
+  (newline)
+  (display 'print-inorder:)
+  (newline)
   (print-inorder tree)
-  (display "-- print-all-traversals --\n")
+  (display 'print-all-traversals:)
+  (newline)
   (print-all-traversals tree)
-  (display "-- print-height-and-leaves --\n")
+  (display 'print-height-and-leaves:)
+  (newline)
   (print-height-and-leaves tree)
   (newline))
 
@@ -18,39 +22,50 @@
 ;; ---------------------------------------------------------------------------
 
 ;; t1:
-;;       1
-;;      / \
-;;     2   3
+;;        4
+;;      /   \
+;;     2     6
+;;    / \   / \
+;;   1   3 5   7
+;; Expected:
+;;   inorder:           (1 2 3 4 5 6 7)
+;;   preorder:          (4 2 1 3 6 5 7)
+;;   postorder:         (1 3 2 5 7 6 4)
+;;   height-and-leaves: (3 4)
 (define t1
-  '(1 (2 () ())
-      (3 () ())))
+  '(4 (2 (1 () ())
+         (3 () ()))
+      (6 (5 () ())
+         (7 () ()))))
 
 ;; t2:
-;;       10
-;;      /  \
-;;     5    15
-;;      \     \
-;;       7     20
+;;   1
+;;    \
+;;     2
+;;      \
+;;       3
+;; Expected:
+;;   inorder:           (1 2 3)
+;;   preorder:          (1 2 3)
+;;   postorder:         (3 2 1)
+;;   height-and-leaves: (3 1)
 (define t2
-  '(10 (5 ()
-           (7 () ()))
-       (15 ()
-           (20 () ()))))
+  '(1 ()
+      (2 ()
+         (3 () ()))))
 
 ;; t3:
-;;         a
-;;        / \
-;;       b   c
-;;      /   / \
-;;     d   e   f
-;;          \
-;;           g
+;;     a
+;;    / \
+;;   b   c
+;; Expected:
+;;   inorder:           (b a c)
+;;   preorder:          (a b c)
+;;   postorder:         (b c a)
+;;   height-and-leaves: (2 2)
 (define t3
-  '(a (b (d () ())
-         ())
-      (c (e ()
-            (g () ()))
-         (f () ()))))
+  '(a (b () ())
+      (c () ())))
 
 ;; Empty tree: '()
 (define t-empty '())
@@ -93,40 +108,28 @@
             (4 () ())))))
 
 ;; ---------------------------------------------------------------------------
-;; Test executions & expected outputs
+;; Test executions and expected output
 ;; ---------------------------------------------------------------------------
 
-;; Expected for t1:
-;; print-inorder:
-;;   (2 1 3)
-;; print-all-traversals:
-;;   (2 1 3)
-;;   (1 2 3)
-;;   (2 3 1)
-;; print-height-and-leaves:
-;;   (2 2)
+;; Expected:
+;;   inorder:           (1 2 3 4 5 6 7)
+;;   preorder:          (4 2 1 3 6 5 7)
+;;   postorder:         (1 3 2 5 7 6 4)
+;;   height-and-leaves: (3 4)
 (run-case "t1" t1)
 
-;; Expected for t2:
-;; print-inorder:
-;;   (5 7 10 15 20)
-;; print-all-traversals:
-;;   (5 7 10 15 20)
-;;   (10 5 7 15 20)
-;;   (7 5 20 15 10)
-;; print-height-and-leaves:
-;;   (3 2)
+;; Expected:
+;;   inorder:           (1 2 3)
+;;   preorder:          (1 2 3)
+;;   postorder:         (3 2 1)
+;;   height-and-leaves: (3 1)
 (run-case "t2" t2)
 
-;; Expected for t3:
-;; print-inorder:
-;;   (d b a e g c f)
-;; print-all-traversals:
-;;   (d b a e g c f)
-;;   (a b d c e g f)
-;;   (d b g e f c a)
-;; print-height-and-leaves:
-;;   (4 3)
+;; Expected:
+;;   inorder:           (b a c)
+;;   preorder:          (a b c)
+;;   postorder:         (b c a)
+;;   height-and-leaves: (2 2)
 (run-case "t3" t3)
 
 ;; Expected for '() (empty tree):

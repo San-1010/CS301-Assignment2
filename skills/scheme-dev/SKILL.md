@@ -40,8 +40,8 @@ description: Guidelines, strict built-in allowlist, testing workflow, and self-r
   racket 26_q3.rkt
   racket 26_q4.rkt
 
-- **Testing S1 functions without modifying `26_q3.rkt`:**
-  racket -t 26_q3.rkt -e "(print-all-traversals '(4 (2 (1 () ()) (3 () ())) (6 (5 () ()) (7 () ()))))"
+- **Testing S1:**
+   { cat ../code/26_q3.rkt; tail -n +2 test_q3.rkt; } > /tmp/run_q3.rkt && racket /tmp/run_q3.rkt && rm /tmp/run_q3.rkt
 
 - **Testing S2 via standard input without modifying `26_q4.rkt`:**
   echo "42 ((1 2) (3 4 5) (6) ()) 3" | racket -t 26_q4.rkt -e "(print-insert-result)"

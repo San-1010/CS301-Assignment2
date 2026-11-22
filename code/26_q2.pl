@@ -1,3 +1,4 @@
+:- use_module(library(lists)).
 
 % split_nonempty(List, Left, Right) holds when
 % List is the concatenation of two nonempty consecutive
