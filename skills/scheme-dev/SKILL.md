@@ -46,8 +46,13 @@ Run from the repository root (CS301-Assignment2), unless otherwise specified
   { cat ../code/26_q3.rkt; tail -n +2 test_q3.rkt; } > /tmp/run_q3.rkt && racket /tmp/run_q3.rkt && rm /tmp/run_q3.rkt
 
 - **Testing S2: (run from root)**
-  { cat code/26_q4.rkt; echo "(print-insert-result)"; } > /tmp/run_q4.rkt && echo "42 ((1 2) (3 4 5) (6) ()) 3" | racket /tmp/run_q4.rkt && rm /tmp/run_q4.rkt
-  { cat code/26_q4.rkt; echo "(print-insert-result) (print-insert-result) (print-insert-result)"; } > /tmp/run_q4.rkt && printf "0 (((1) 2) (3) ((4 5 6) ())) 3\n7 () 3\n7 () 0\n" | racket /tmp/run_q4.rkt && rm /tmp/run_q4.rkt
+  Run the complete S2 test suite: Combine the solution and test file into a temporary Racket file:
+  { cat code/26_q4.rkt; cat tests/test_q4.rkt; } > /tmp/run_q4.rkt && racket /tmp/run_q4.rkt
+  Test input/output: Verify that print-insert-result reads the three inputs and prints the expected result:
+  { cat code/26_q4.rkt; echo '(print-insert-result)'; } > /tmp/run_q4_io.rkt && echo '42 ((1 2) (3 4 5) (6) ()) 3' | racket /tmp/run_q4_io.rkt
+  { cat code/26_q4.rkt; echo '(print-insert-result) (print-insert-result) (print-insert-result)'; } > /tmp/run_q4_multi.rkt && printf '0 (((1) 2) (3) ((4 5 6) ())) 3\n7 () 3\n7 () 0\n' | racket /tmp/run_q4_multi.rkt && rm /tmp/run_q4_multi.rkt
+  Clean up temporary files:
+  rm -f /tmp/run_q4.rkt /tmp/run_q4_io.rkt
 
 ## 5. Self-Review Checklist (Apply Before Finalizing Any Response)
 1. **Unit scope:** Does this response implement or review only the single requested function or test file?
