@@ -89,3 +89,20 @@ format_child(node(Op, _, _), Text, ParentPrec, Side, Result) :-
     string_concat(Temp, ")", Result).
 
 format_child(node(_, _, _), Text, _, _, Text).
+
+
+% generate_equation(Numbers, Equation) holds when
+% Equation is a canonical arithmetic equation formed
+% using every integer in Numbers exactly once and in
+% the original order, with both sides evaluating to
+% the same integer.
+
+generate_equation(Numbers, Equation) :-
+    split_nonempty(Numbers, LeftNumbers, RightNumbers),
+    expression(LeftNumbers, LeftTree, LeftValue),
+    expression(RightNumbers, RightTree, RightValue),
+    LeftValue =:= RightValue,
+    format_expression(LeftTree, LeftString),
+    format_expression(RightTree, RightString),
+    string_concat(LeftString, "=", Temp),
+    string_concat(Temp, RightString, Equation).
