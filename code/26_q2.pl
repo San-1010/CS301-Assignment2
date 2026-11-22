@@ -119,3 +119,12 @@ all_equations(Numbers, Equations) :-
             generate_equation(Numbers, Equation),
             AllEquations),
     sort(AllEquations, Equations).
+
+
+% count_equations(Numbers, Count) holds when Count
+% is the number of distinct valid arithmetic equations
+% generated using Numbers in their original order.
+
+count_equations(Numbers, Count) :-
+    all_equations(Numbers, Equations),
+    length(Equations, Count).
