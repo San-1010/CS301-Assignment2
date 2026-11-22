@@ -25,7 +25,7 @@ description: Guidelines, constraints, testing workflow, and self-review checklis
 - **Clue 9 Comment (P1.c):** Place `% CLUE 9: <English sentence>` on the line immediately preceding `clue(9, Solution) :-`.
 
 ## 4. Running & Testing
-Run from the directory containing `id_q1.pl` / `id_q2.pl` (replace `id` with your group ID):
+Run from the directory containing 26_q1.pl` / `26_q2.pl`
 - **Run `main/0` (P1):**
   ```bash
-  swipl -q -f id_q1.pl -g main -t halt
+  swipl -q -f 26_q1.pl -g main -t halt

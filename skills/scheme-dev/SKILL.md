@@ -8,7 +8,7 @@ description: Guidelines, strict built-in allowlist, testing workflow, and self-r
 ## 1. Environment & Strict Built-in Allowlist
 - **Runtime:** Racket 8.x.
 - **Header:** Every `.rkt` submission file must begin with `#lang racket/base` on line 1.
-- **Top-level purity:** Submission files (`id_q3.rkt`, `id_q4.rkt`) must contain **only definitions** (`define`). Never include top-level function calls, test expressions, or `display` calls, as the grader appends its own calls to the end of the file.
+- **Top-level purity:** Submission files (`26_q3.rkt`, `26_q4.rkt`) must contain **only definitions** (`define`). Never include top-level function calls, test expressions, or `display` calls, as the grader appends its own calls to the end of the file.
 - **Allowed built-ins ONLY:**
   - Binding & control: `define`, `lambda`, `let`, `let*`, `letrec`, named `let`, `if`, `cond` (with `else`), `and`, `or`, `not`, `begin`, `quote` (`'`).
   - Pairs & lists: `cons`, `car`, `cdr`, `list`, and `car`/`cdr` compositions up to 4 levels (`cadr`, `cddr`, `caddr`, `cdddr`, `cadddr`, `cddddr`, etc.).
@@ -32,10 +32,10 @@ description: Guidelines, strict built-in allowlist, testing workflow, and self-r
 - **Recursion & Performance:**
   - Prefer tail recursion with an accumulator (using named `let` or a helper) for linear list operations (`my-length`, `my-map`, `my-reverse`, `my-append`).
   - Hidden tests in S2 include nesting depth **100** and flat lists of **10,000 elements**; linear list traversals must not overflow the call stack.
-- **S2 Final Definition Rule:** In `id_q4.rkt`, ensure there is only **one** definition of `insert-if-short`—the final version defined in terms of `make-inserter`.
+- **S2 Final Definition Rule:** In `26_q4.rkt`, ensure there is only **one** definition of `insert-if-short`—the final version defined in terms of `make-inserter`.
 
 ## 4. Running & Testing
 - **Direct execution (verifies zero output on load):**
   ```bash
-  racket id_q3.rkt
-  racket id_q4.rkt
+  racket 26_q3.rkt
+  racket 26_q4.rkt
