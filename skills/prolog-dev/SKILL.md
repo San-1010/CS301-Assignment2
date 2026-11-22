@@ -24,16 +24,20 @@ description: Guidelines, constraints, testing workflow, and self-review checklis
 - **Documentation:** Every predicate must have a concise comment stating its **declarative reading** (what logical relation holds between its arguments) and argument modes (`+`, `-`, `?`).
 - **Clue 9 Comment (P1.c):** Place `% CLUE 9: <English sentence>` on the line immediately preceding `clue(9, Solution) :-`.
 
+
 ## 4. Running & Testing
-Run from the directory containing `26_q1.pl` / `26_q2.pl`
+Run from the repository root (CS301-Assignment2).
+Source files are located in `code/` and test files in `tests/`.
+
 - **Run `main/0` (P1):**
-  swipl -q -f 26_q1.pl -g main -t halt
+  `swipl -q -f code/26_q1.pl -g main -t halt`
 - **Run a specific goal / test query:**
-  swipl -q -f 26_q1.pl -g "count_solutions([1,2,3,4,5,6,7,8], N), writeln(N)" -t halt
-  swipl -q -f 26_q2.pl -g "all_equations([4,2,5,3], Es), writeln(Es)" -t halt
+  `swipl -q -f code/26_q1.pl -g "count_solutions([1,2,3,4,5,6,7,8], N), writeln(N)" -t halt`
+  `swipl -q -f code/26_q2.pl -g "all_equations([4,2,5,3], Es), writeln(Es)" -t halt`
 - **Run unit test files (`tests/`):**
-  swipl -q -f tests/test_q1.pl -g run_tests -t halt
-  swipl -q -f tests/test_q2.pl -g run_tests -t halt
+  `swipl -q -f tests/test_q1.pl -g run_tests -t halt`
+  `swipl -q -f tests/test_q2.pl -g run_tests -t halt`
+
 
 ## 5. Self-Review Checklist (Apply Before Finalizing Any Response)
 1. **Unit scope:** Does this response implement or review only a single requested unit of work?
@@ -46,6 +50,22 @@ Run from the directory containing `26_q1.pl` / `26_q2.pl`
 6. **Edge Cases & Termination:**
    - P2: Does `generate_equation/2` fail cleanly (without looping or throwing) on `[]`, `[X]`, or unsolvable lists? Does `all_equations/2` return `[]` on unsolvable lists and sort/deduplicate with `sort/2`?
    - P2: Is division guarded against zero divisors (`D =\= 0`) and non-zero remainders (`N mod D =:= 0`) at **every** intermediate step?
+7. **Canonical Formatting (P2):**
+   - Multiplication and division have higher precedence than addition and subtraction.
+   - All operators are left-associative.
+   - Parenthesize a left child only when its top operator has lower precedence than its parent.
+   - Parenthesize a right child when its top operator has equal or lower precedence than its parent.
+   - Never parenthesize a single number.
+   - Different expression trees must produce different strings.
+8. **P2 Expected Results:**
+   - `all_equations([4,2,5,3], Es)` returns exactly 7 equations.
+   - `all_equations([2,3,4], Es)` returns `[]`.
+   - `all_equations([2,4,8], Es)` returns `["2*4=8"]`.
+   - `all_equations([], Es)` returns `[]`.
+   - `count_equations([4,2,5,3], N)` returns `N = 7`.
+   - `count_equations([], N)` returns `N = 0`.
+
+
 
 ## 6. Known AI Failure Modes in Prolog
 - **Unquoted special atoms:** Writing `Alex`, `AI`, or `c++` instead of `'Alex'`, `'AI'`, `'c++'`, silently turning `Alex`/`AI` into unbound variables and causing syntax errors on `c++`.
