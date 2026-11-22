@@ -21,10 +21,9 @@
   (display (inorder-acc tree '()))
   (newline))
 
-
 ;; Contract: preorder-acc : BTree (Listof Any) -> (Listof Any)
 ;; Recursive reading: Prepends the current node onto the preorder traversal of
-;; right appended (via acc) to the preorder traversal of left, without append or reverse.
+;; left, which threads its accumulator through the preorder traversal of right.
 (define (preorder-acc tree acc)
   (cond
     [(null? tree) acc]
@@ -60,7 +59,6 @@
   (newline)
   (display (postorder-acc tree '()))
   (newline))
-
 
 ;; Contract: tree-height : BTree -> Natural
 ;; Recursive reading: Returns 0 for an empty tree; otherwise adds 1 to the
