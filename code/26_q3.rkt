@@ -60,3 +60,35 @@
   (newline)
   (display (postorder-acc tree '()))
   (newline))
+
+
+;; Contract: tree-height : BTree -> Natural
+;; Recursive reading: Returns 0 for an empty tree; otherwise adds 1 to the
+;; greater of the left and right subtree heights.
+(define (tree-height tree)
+  (cond
+    [(null? tree) 0]
+    [else
+     (let ([lh (tree-height (cadr tree))]
+           [rh (tree-height (caddr tree))])
+       (+ 1 (if (> lh rh) lh rh)))]))
+
+;; Contract: leaf-count : BTree -> Natural
+;; Recursive reading: Returns 0 for an empty tree, 1 when both left and right
+;; subtrees are empty, and otherwise the sum of leaf counts in left and right.
+(define (leaf-count tree)
+  (cond
+    [(null? tree) 0]
+    [else
+     (let ([left (cadr tree)]
+           [right (caddr tree)])
+       (if (and (null? left) (null? right))
+           1
+           (+ (leaf-count left) (leaf-count right))))]))
+
+;; Contract: print-height-and-leaves : BTree -> Void
+;; Recursive reading: Computes the height and leaf count of tree and prints
+;; them as a two-element list on one line via display followed by newline.
+(define (print-height-and-leaves tree)
+  (display (list (tree-height tree) (leaf-count tree)))
+  (newline))
