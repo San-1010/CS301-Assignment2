@@ -39,3 +39,26 @@ description: Guidelines, strict built-in allowlist, testing workflow, and self-r
   ```bash
   racket 26_q3.rkt
   racket 26_q4.rkt
+
+- **Testing S1 functions without modifying `26_q3.rkt`:**
+  racket -t 26_q3.rkt -e "(print-all-traversals '(4 (2 (1 () ()) (3 () ())) (6 (5 () ()) (7 () ()))))"
+
+- **Testing S2 via standard input without modifying `26_q4.rkt`:**
+  echo "42 ((1 2) (3 4 5) (6) ()) 3" | racket -t 26_q4.rkt -e "(print-insert-result)"
+
+## 5. Self-Review Checklist (Apply Before Finalizing Any Response)
+1. **Unit scope:** Does this response implement or review only the single requested function or test file?
+2. **Allowlist audit:** Scan every identifier in the code—is every non-local symbol strictly in the Section 1 allowlist?
+3. **File cleanliness:** Does the file start with `#lang racket/base` and contain zero top-level calls or prints?
+4. **Stack safety:** Are `my-length` and `my-map` tail-recursive (accumulator + reverse) so 10,000-element lists succeed without stack overflow?
+5. **Specification edge cases:**
+   - S1: Does `'()` print `()` for traversals and `(0 0)` for `print-height-and-leaves`? Does every print function end with `(newline)`?
+   - S2: Is list length computed on the **original** list before prepending `x`? Does `'()` have length `0` and become `(x)` when `(len-ok? 0)` holds, including at the top level? Is `insert-if-short` defined once using `make-inserter`?
+
+## 6. Known AI Failure Modes in Racket (`#lang racket/base`)
+- **Calling forbidden standard library functions:** Accidentally using `append`, `reverse`, `length`, `map`, `equal?`, or `add1`/`sub1` (use `(+ x 1)` and `(- x 1)` instead of `add1`/`sub1`, which are not on the allowlist).
+- **Using `#lang racket` instead of `#lang racket/base`:** `#lang racket` loads extra bindings that mask allowlist violations during local testing and fail grading checks.
+- **Deep `c...r` chains:** Using 5-level accessors like `caddddr`, which exceed the 4-level limit (`cadr`, `caddr`, `cadddr`, etc.).
+- **Non-tail-recursive `my-map` / `my-length`:** Writing `(cons (f (car lst)) (my-map f (cdr lst)))` blows the stack on 10,000-element lists in S2; accumulate in reverse with a named `let` and reverse with `my-reverse`.
+- **Leaving top-level calls in `.rkt` files:** Leaving `(print-inorder t1)` at the bottom of `id_q3.rkt`, causing unexpected output before the grader's own test calls run.
+- **Duplicate `insert-if-short` definitions in S2:** Keeping both the S2.b direct version and the S2.c `make-inserter` version in `id_q4.rkt`.
