@@ -18,7 +18,7 @@ valid_solution(Solution) :-
 
 
 % clue(+N, +Solution)
-% Declarative reading: Clue number N (for N in 1..8) is satisfied by the
+% Declarative reading: Clue number N (for N in 1..9) is satisfied by the
 % complete candidate assignment Solution of four p(Name, Dept, Lang, Project) terms.
 clue(1, Solution) :-
     member(p(Name, Dept, _, 'AI'), Solution),
