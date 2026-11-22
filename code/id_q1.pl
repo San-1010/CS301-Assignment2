@@ -53,3 +53,35 @@ clue(7, Solution) :-
 clue(8, Solution) :-
     member(p(_, research, Lang, data), Solution),
     Lang \= javascript.
+
+% solve(?Solution)
+% Declarative reading: Solution is a valid assignment of departments,
+% favorite languages, and project preferences to 'Alex', 'Ben', 'Carla', and 'Dana' 
+% that satisfies all clues from 1 through 8.
+solve(Solution) :-
+    valid_solution(Solution),
+    clue(1, Solution),
+    clue(2, Solution),
+    clue(3, Solution),
+    clue(4, Solution),
+    clue(5, Solution),
+    clue(6, Solution),
+    clue(7, Solution),
+    clue(8, Solution).
+
+% print_solution(+Solution)
+% Declarative reading: Prints each p(Name, Dept, Lang, Proj) term in
+% Solution across two lines: Name on the first line, followed by
+% [Dept, Lang, Proj] on the second line.
+print_solution([]).
+print_solution([p(Name, Dept, Lang, Proj) | Rest]) :-
+    format('~w~n[~w, ~w, ~w]~n', [Name, Dept, Lang, Proj]),
+    print_solution(Rest).
+
+% main
+% Declarative reading: Derives one solution satisfying clues 1 through 8
+% and prints it in the eight-line format required by P1.a.
+main :-
+    solve(Solution),
+    !,
+    print_solution(Solution).
