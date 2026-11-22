@@ -75,16 +75,15 @@ solve(Solution) :-
 
 % print_solution(+Solution)
 % Declarative reading: Prints each p(Name, Dept, Lang, Proj) term in
-% Solution across two lines: Name on the first line, followed by
-% [Dept, Lang, Proj] on the second line.
+% Solution on a single line in the format "Name = [Dept, Lang, Proj]".
 print_solution([]).
 print_solution([p(Name, Dept, Lang, Proj) | Rest]) :-
-    format('~w~n[~w, ~w, ~w]~n', [Name, Dept, Lang, Proj]),
+    format('~w = [~w, ~w, ~w]~n', [Name, Dept, Lang, Proj]),
     print_solution(Rest).
 
 % main
 % Declarative reading: Derives one solution satisfying clues 1 through 8
-% and prints it in the eight-line format required by P1.a.
+% and prints it in the four-line format required by P1.a.
 main :-
     solve(Solution),
     !,

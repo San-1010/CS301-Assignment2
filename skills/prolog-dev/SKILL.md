@@ -45,7 +45,7 @@ Source files are located in `code/` and test files in `tests/`.
 3. **Libraries:** Are only `lists`, `apply`, `yall`, and/or `aggregate` imported?
 4. **Declarative comments:** Does every predicate have a clear declarative reading comment?
 5. **Types & Formatting (P1 & P2):**
-   - P1: Are `'Alex'`, `'AI'`, and `'c++'` properly quoted? Does `main/0` print the exact 8-line format with no extra spaces or debug text?
+   - P1: Are `'Alex'`, `'AI'`, and `'c++'` properly quoted? Does `main/0` print the exact 4-line format with no extra spaces or debug text?
    - P2: Are equations returned as SWI-Prolog **strings** (`"..."`), not atoms (`'...'`) or code lists?
 6. **Edge Cases & Termination:**
    - P2: Does `generate_equation/2` fail cleanly (without looping or throwing) on `[]`, `[X]`, or unsolvable lists? Does `all_equations/2` return `[]` on unsolvable lists and sort/deduplicate with `sort/2`?
