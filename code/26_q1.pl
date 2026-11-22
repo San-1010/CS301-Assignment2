@@ -85,3 +85,20 @@ main :-
     solve(Solution),
     !,
     print_solution(Solution).
+
+% satisfies_clues(+Active, +Solution)
+% Declarative reading: Every clue number in the list Active holds for the
+% candidate assignment Solution.
+satisfies_clues([], _).
+satisfies_clues([C | Cs], Solution) :-
+    clue(C, Solution),
+    satisfies_clues(Cs, Solution).
+
+% count_solutions(+Active, -N)
+% Declarative reading: N is the number of valid assignments Solution that
+% satisfy all clue numbers listed in Active (ignoring all other clues).
+count_solutions(Active, N) :-
+    findall(Solution,
+            (valid_solution(Solution), satisfies_clues(Active, Solution)),
+            Solutions),
+    length(Solutions, N).
